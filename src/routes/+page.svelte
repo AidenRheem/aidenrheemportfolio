@@ -1,6 +1,3 @@
-<script lang="ts">
-</script>
-
 <div class="min-h-screen flex items-center justify-center">
   <div class="container max-w-screen-sm border border-overlay2 p-24 relative bg-black/50 backdrop-blur-sm text-[#28282B]">
     <div class="flex items-center justify-center pb-6">
