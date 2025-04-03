@@ -19,9 +19,16 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
+		"svader": "^0.5.4",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
 		"vite": "^6.2.5"
+	},
+	"dependencies": {
+		"@braebo/pocket-shader": "npm:@jsr/braebo__pocket-shader@^0.3.1",
+		"@fabwaseem/easy-led-matrix": "^1.3.1",
+		"@tailwindcss/vite": "^4.1.1",
+		"tailwindcss": "^4.1.1"
 	}
 }

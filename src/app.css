@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Moonhouse";
+  src: url("/Moonhouse-yE5M.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Krypton";
+  src: url("/MonaspaceKrypton.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+.krypton {
+  font-family: "Krypton", sans-serif;
+}
+
+.moonhouse {
+  font-family: "Moonhouse", sans-serif;
+}
