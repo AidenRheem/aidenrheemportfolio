@@ -101,7 +101,6 @@
         {#if spotifyData}
         <a id="spotify-status" href={`https://open.spotify.com/track/${spotifyData.track_id}`} target="_blank" class="flex items-center w-full">
           <img src={spotifyData.album_art_url} alt={spotifyData.album} class="h-16 w-16 p-1">
-
           <div class="flex-1 pl-2 overflow-hidden">
             <p class="text-base font-semibold text-[#dbdbde] krypton text-clip whitespace-nowrap overflow-hidden">{spotifyData.song}</p>
             <p class="text-xs text-gray-400 krypton truncate">{spotifyData.artist}</p>
