@@ -26,7 +26,7 @@
   });
 </script>
 
-<div class="relative min-h-screen">
+<div class="relative min-h-screen w-full h-full">
   <div bind:this={container} class="absolute inset-0 w-full h-full z-0"></div>
   
   <div class="min-h-screen relative z-10">
