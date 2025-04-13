@@ -107,7 +107,7 @@
           </div>
         </a>
         {:else}
-        <p id="spotify-text" class="text-sm text-[#dbdbde]">currently not listening...</p>
+        <p id="spotify-text" class="text-sm text-[#dbdbde] krypton">currently not listening...</p>
         {/if}
       </div>
     </div>
