@@ -1,0 +1,165 @@
+<script lang="ts"> 
+    import { onMount } from 'svelte';
+  
+    let germanyTimeNow = '';
+    let spotifyData: {
+      track_id: string;
+      album_art_url: string;
+      album: string;
+      song: string;
+      artist: string;
+    } | null = null;
+  
+    const discordID = '316991053242564609'; // maybe we move this into env?
+    let statusData = '';
+  
+    function updateTime() {
+      const d = new Date();
+      const localTime = d.getTime();
+      const localOffset = d.getTimezoneOffset() * 60000;
+      const utc = localTime + localOffset;
+      const offset = 2; 
+      const germany = utc + 3600000 * offset;
+      germanyTimeNow = new Date(germany).toLocaleTimeString();
+    }
+  
+    const fetchSpotify = async () => {
+      try {
+        const response = await fetch(`https://api.lanyard.rest/v1/users/${discordID}`);
+        const data = await response.json();
+        spotifyData = data.data.spotify;
+        statusData = data.data.discord_status;
+  
+      } catch (error) {
+        console.error('Error fetching Spotify data:', error);
+        spotifyData = null; 
+      }
+    };
+  
+    let dotColor = "#a6a6ad";
+  
+  
+    $: {
+    if (statusData === "offline") {
+      dotColor = "#a6a6ad";
+    } else if (statusData === "dnd") {
+      dotColor = "#812e25";
+    } else if (statusData === "idle") {
+      dotColor = "#f79c18";
+    } else if (statusData === "online") {
+      dotColor = "#4f8832";
+    }
+  }
+  
+    onMount(() => {
+      updateTime();
+      const timeInterval = setInterval(updateTime, 1000);
+  
+      fetchSpotify();
+      const spotifyInterval = setInterval(fetchSpotify, 10000);
+  
+      return () => {
+        clearInterval(timeInterval);
+        clearInterval(spotifyInterval);
+      };
+    });
+  
+    console.log(dotColor, statusData, spotifyData);
+  </script>
+  
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="container max-w-screen-sm border border-overlay2 p-18 relative bg-black/50 backdrop-blur-sm text-[#28282B]">
+      <div class="flex items-center justify-center pb-6">
+        <!-- my logo, top left -->
+        <div class="absolute top-2 left-6 flex items-center text-3xl group hover:text-[#dbdbde]">
+          <a class="moonhouse text-[#a6a6ad] group-hover:text-[#dbdbde]" href="/">r</a>
+          <a class="moonhouse group-hover:text-[#dbdbde]" href="/" style="margin-left: -4.5px; color: {dotColor};">.</a>
+        </div>
+  
+        <!-- hrefs, top right -->
+        <div class="absolute top-4.75 right-6 flex items-center">
+          <span class="krypton text-sm text-[#a6a6ad]" style="margin-left: -2px;">
+            <a href="/projects" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">projects</a>
+            <a href="/socials" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">socials</a>
+            <a href="/music" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">music</a>
+            <a href="/blog" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">blog</a>
+          </span>
+        </div>
+  
+        <!-- text -->
+        <div class="flex flex-col items-center justify-center">
+          <span class="krypton">
+            <p class="text-sm text-[#dbdbde]">feel free to contact me through any of the platforms below!</p>
+          </span>
+        </div>
+      </div>
+  
+      <!-- socials box -->
+      <div class="container max-w-screen-sm border border-overlay2 p-4 text-[#28282B]">
+        <div class="socials-grid">
+          <a href="https://github.com/roschreiber" target="_blank" rel="noopener noreferrer" class="social-item">
+            <div class="icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg>
+            </div>
+            <span class="social-text krypton">GitHub</span>
+          </a>
+          <a href="https://discord.com/users/316991053242564609" target="_blank" rel="noopener noreferrer" class="social-item">
+            <div class="icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-discord"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" /><path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" /><path d="M7 16.5c3.5 1 6.5 1 10 0" /></svg>
+            </div>
+            <span class="social-text krypton">Discord</span>
+          </a>
+          <a href="mailto:schreiber.robin@proton.me" class="social-item">
+            <div class="icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+            </div>
+            <span class="social-text krypton">Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO: move everything except gtrid to tailwindcss -->
+<style>
+  .socials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #282828;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .social-item:hover {
+    transform: translateY(-3px);
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .social-icon {
+    width: 24px;
+    height: 24px;
+    color: #dbdbde;
+  }
+  
+  .social-text {
+    font-size: 0.8rem;
+    color: #dbdbde;
+  }
+</style>
