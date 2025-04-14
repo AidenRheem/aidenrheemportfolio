@@ -1,45 +1,3 @@
-<script context="module">
-	if (typeof window !== 'undefined') {
-		window.addEventListener('load', () => {
-			const sliders = document.querySelectorAll('.tracks-slider');
-
-			sliders.forEach((slider) => {
-				let isDown = false;
-				let startX = 0;
-				let scrollLeft = 0;
-				const htmlSlider = slider as HTMLElement;
-
-				slider.addEventListener('mousedown', function (e) {
-					isDown = true;
-					slider.classList.add('active');
-					const mouseEvent = e as MouseEvent;
-					startX = mouseEvent.pageX - htmlSlider.offsetLeft;
-					scrollLeft = htmlSlider.scrollLeft;
-				});
-
-				slider.addEventListener('mouseleave', function () {
-					isDown = false;
-					slider.classList.remove('active');
-				});
-
-				slider.addEventListener('mouseup', function () {
-					isDown = false;
-					slider.classList.remove('active');
-				});
-
-				slider.addEventListener('mousemove', function (e) {
-					if (!isDown) return;
-					e.preventDefault();
-					const mouseEvent = e as MouseEvent;
-					const x = mouseEvent.pageX - htmlSlider.offsetLeft;
-					const walk = (x - startX) * 2;
-					htmlSlider.scrollLeft = scrollLeft - walk;
-				});
-			});
-		});
-	}
-</script>
-
 <script lang="ts">
 	import { onMount } from 'svelte';
 
@@ -189,7 +147,7 @@
 
 			topArtists = data.items.map((item: StatsFmArtistItem) => ({
 				artist: item.artist,
-				url: item.artist.externalIds.spotify && item.artist.externalIds.spotify.length > 0
+				url: item.artist.externalIds.spotify?.[0]
 					? `https://open.spotify.com/artist/${item.artist.externalIds.spotify[0]}`
 					: '#'
 			}));
@@ -215,6 +173,56 @@
 	});
 
 	console.log(dotColor, statusData, spotifyData);
+
+	onMount(() => {
+		const sliders = document.querySelectorAll('.tracks-slider');
+
+		sliders.forEach((slider) => {
+			let isDown = false;
+			let startX = 0;
+			let scrollLeft = 0;
+			const htmlSlider = slider as HTMLElement;
+
+			const startDrag = ((e: MouseEvent) => {
+				isDown = true;
+				slider.classList.add('active');
+				startX = e.pageX - htmlSlider.offsetLeft;
+				scrollLeft = htmlSlider.scrollLeft;
+			}) as EventListener;
+
+			const stopDrag = (() => {
+				isDown = false;
+				slider.classList.remove('active');
+			}) as EventListener;
+
+			const drag = ((e: MouseEvent) => {
+				if (!isDown) return;
+				e.preventDefault();
+				const x = e.pageX - htmlSlider.offsetLeft;
+				const walk = (x - startX) * 2; // Adjust scroll speed
+				htmlSlider.scrollLeft = scrollLeft - walk;
+			}) as EventListener;
+
+			const handleWheel = ((e: WheelEvent) => {
+				e.preventDefault();
+				htmlSlider.scrollLeft += e.deltaY;
+			}) as EventListener;
+
+			slider.addEventListener('mousedown', startDrag);
+			slider.addEventListener('mouseleave', stopDrag);
+			slider.addEventListener('mouseup', stopDrag);
+			slider.addEventListener('mousemove', drag);
+			slider.addEventListener('wheel', handleWheel);
+
+			const trackCards = slider.querySelectorAll('.track-card');
+			trackCards.forEach((card) => {
+				card.addEventListener('mousedown', startDrag);
+				card.addEventListener('mousemove', drag);
+				card.addEventListener('mouseup', stopDrag);
+				card.addEventListener('mouseleave', stopDrag);
+			});
+		});
+	});
 </script>
 
 <div class="min-h-screen flex items-center justify-center">
@@ -249,6 +257,7 @@
 			<div class="flex items-center justify-between mb-2">
 				<div class="flex items-end gap-2">
 					<span class="text-lg font-medium text-[#dbdbde] krypton">Top tracks</span>
+					<span class="text-sm mb-2 font-medium text-[#54545c] krypton">(4 weeks)</span>
 				</div>
 			</div>
 				<div class="tracks-slider">
@@ -269,6 +278,7 @@
 			<div class="flex items-center justify-between mb-2">
 				<div class="flex items-end gap-2">
 					<span class="text-lg font-medium text-[#dbdbde] krypton">Top artists</span>
+					<span class="text-sm mb-2 font-medium text-[#54545c] krypton">(4 weeks)</span>
 				</div>
 			</div>
 				<div class="tracks-slider">
@@ -372,7 +382,7 @@
 		cursor: grab;
 	}
 
-	.tracks-slider.active {
+	:global(.tracks-slider.active) {
 		cursor: grabbing;
 	}
 </style>

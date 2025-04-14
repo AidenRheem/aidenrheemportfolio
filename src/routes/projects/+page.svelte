@@ -97,14 +97,14 @@
       <div class="projects-grid">
         <!-- Project 1 -->
         <div class="project-item group">
-          <a href="https://example.com" rel="noopener noreferrer" target="_blank">
+          <a href="https://github.com/roschreiber/bambulab-neon" rel="noopener noreferrer" target="_blank">
             <div class="project-container">
               <div class="image-container">
                 <img
                   width="246"
                   height="64"
                   class="project-image"
-                  src="https://placehold.co/246x64"
+                  src="bl-neon.png"
                   alt="Project Preview"
                 />
                 <span class="hover-overlay">
@@ -115,16 +115,17 @@
               </div>
               <div class="info-cont">
                 <div class="project-title krypton">
-                  <b>Lorem Ipsum</b> 
+                  <b>Bambulab Neon</b> 
                 </div>
                 <div class="project-desc krypton">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam at.
+                    Display printer status on a RGB Matrix.
                 </div>
               </div>
             </div>
           </a>
         </div>
 
+        <!-- Project 2 
         <div class="project-item group">
             <a href="https://example.com" rel="noopener noreferrer" target="_blank">
               <div class="project-container">
@@ -152,7 +153,7 @@
                 </div>
               </div>
             </a>
-          </div>
+          </div> -->
       </div>
     </div>
 </div>
