@@ -38,7 +38,6 @@
 
   let dotColor = "#a6a6ad";
 
-
   $: {
   if (statusData === "offline") {
     dotColor = "#a6a6ad";

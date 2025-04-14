@@ -8,6 +8,6 @@ export default defineConfig({
 		tailwindcss(),
 	],
 	ssr: {
-		noExternal: ['svelte-markdown'],
+		noExternal: ['svelte-markdown', 'fs', 'path'],
 	},
 });

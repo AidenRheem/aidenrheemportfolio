@@ -31,7 +31,6 @@
 		"@humanspeak/svelte-markdown": "^0.8.0",
 		"@tailwindcss/typography": "^0.5.16",
 		"@tailwindcss/vite": "^4.1.3",
-		"fs": "^0.0.1-security",
 		"github-markdown-css": "^5.8.1",
 		"gray-matter": "^4.0.3",
 		"path": "^0.12.7",
