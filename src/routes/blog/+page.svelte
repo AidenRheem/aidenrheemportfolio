@@ -77,7 +77,7 @@
       <div class="flex items-center justify-center pb-6">
         <!-- my logo, top left -->
         <div class="absolute top-2 left-6 flex items-center text-3xl group hover:text-[#dbdbde]">
-          <a class="moonhouse text-[#a6a6ad] group-hover:text-[#dbdbde]" href="/">r</a>
+          <a class="moonhouse text-[#a6a6ad] group-hover:text-[#dbdbde]" href="/">a</a>
           <a class="moonhouse group-hover:text-[#dbdbde]" href="/" style="margin-left: -4.5px; color: {dotColor};">.</a>
         </div>
   
@@ -94,7 +94,7 @@
         <!-- text -->
         <div class="flex flex-col items-center justify-center">
           <span class="krypton">
-            <p class="text-sm text-[#dbdbde]">down below are all of my current blog posts. i usually write about <b>random shit</b>.</p>
+            <p class="text-sm text-[#dbdbde]">down below are all of my current blog posts. i'll probably have <b>none</b>.</p>
           </span>
         </div>
       </div>

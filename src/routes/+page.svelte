@@ -71,7 +71,7 @@
     <div class="flex items-center justify-center pb-6">
       <!-- my logo, top left -->
       <div class="absolute top-2 left-6 flex items-center text-3xl group hover:text-[#dbdbde]">
-        <a class="moonhouse text-[#a6a6ad] group-hover:text-[#dbdbde]" href="/">r</a>
+        <a class="moonhouse text-[#a6a6ad] group-hover:text-[#dbdbde]" href="/">a</a>
         <a class="moonhouse group-hover:text-[#dbdbde]" href="/" style="margin-left: -4.5px; color: {dotColor};">.</a>
       </div>
 
@@ -88,8 +88,9 @@
       <!-- text -->
       <div class="flex flex-col items-center justify-center">
         <span class="krypton">
-          <p class="text-sm text-[#dbdbde]">hi, i'm <b>aiden rheem</b> and I'm <b>17</b> years old. You can find my work & some info about me here.</p>
-          <p class="text-sm text-[#dbdbde]">The time in <b>Los Angeles, CA</b> is currently <span class="timenow"><b>{LATimeNow}</b></span></p>
+          <p class="text-sm text-[#dbdbde]">hi, 안녕, i'm <b>aiden rheem</b> and i'm <b>17</b>.</p>
+          <p class="text-sm text-[#dbdbde]">you can find my work & some info about me here.</p>
+          <p class="text-sm text-[#dbdbde]">the time in <b>Los Angeles, CA</b> is currently <span class="timenow"><b>{LATimeNow}</b></span></p>
         </span>
       </div>
     </div>
