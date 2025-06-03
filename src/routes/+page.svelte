@@ -1,7 +1,7 @@
 <script lang="ts"> 
   import { onMount } from 'svelte';
 
-  let germanyTimeNow = '';
+  let LATimeNow = '';
   let spotifyData: {
     track_id: string;
     album_art_url: string;
@@ -10,7 +10,7 @@
     artist: string;
   } | null = null;
 
-  const discordID = '316991053242564609'; // maybe we move this into env?
+  const discordID = '883816535033020416'; // maybe we move this into env?
   let statusData = '';
 
   function updateTime() {
@@ -18,14 +18,14 @@
     const localTime = d.getTime();
     const localOffset = d.getTimezoneOffset() * 60000;
     const utc = localTime + localOffset;
-    const offset = 2; 
-    const germany = utc + 3600000 * offset;
-    germanyTimeNow = new Date(germany).toLocaleTimeString();
+    const offset = -7; 
+    const LA = utc + 3600000 * offset;
+    LATimeNow = new Date(LA).toLocaleTimeString();
   }
 
   const fetchSpotify = async () => {
     try {
-      const response = await fetch(`https://api.lanyard.rest/v1/users/${discordID}`);
+      const response = await fetch(`https://api.lanyard.rest/v1/users/883816535033020416`);
       const data = await response.json();
       spotifyData = data.data.spotify;
       statusData = data.data.discord_status;
@@ -78,18 +78,18 @@
       <!-- hrefs, top right -->
       <div class="absolute top-4.75 right-6 flex items-center">
         <span class="krypton text-sm text-[#a6a6ad]" style="margin-left: -2px;">
-          <a href="/projects" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">projects</a>
-          <a href="/socials" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">socials</a>
-          <a href="/music" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">music</a>
-          <a href="/blog" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">blog</a>
+          <a href="/projects" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">1.</a>
+          <a href="/socials" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">2.</a>
+          <a href="/music" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">3.</a>
+          <a href="/blog" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">4.</a>
         </span>
       </div>
 
       <!-- text -->
       <div class="flex flex-col items-center justify-center">
         <span class="krypton">
-          <p class="text-sm text-[#dbdbde]">hi, i'm <b>rob</b> and I'm currently <b>16</b> years old. You can find my projects, music stats & some info about me here.</p>
-          <p class="text-sm text-[#dbdbde]">The time in <b>Germany</b> is currently <span class="timenow"><b>{germanyTimeNow}</b></span></p>
+          <p class="text-sm text-[#dbdbde]">hi, i'm <b>aiden rheem</b> and I'm <b>17</b> years old. You can find my work & some info about me here.</p>
+          <p class="text-sm text-[#dbdbde]">The time in <b>Los Angeles, CA</b> is currently <span class="timenow"><b>{LATimeNow}</b></span></p>
         </span>
       </div>
     </div>

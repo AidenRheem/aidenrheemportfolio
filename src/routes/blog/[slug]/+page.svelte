@@ -2,7 +2,7 @@
 	import SvelteMarkdown from '@humanspeak/svelte-markdown';
     import { onMount } from 'svelte';
 
-    const discordID = '316991053242564609'; // maybe we move this into env?
+    const discordID = '883816535033020416'; // maybe we move this into env?
     let statusData = '';
 
     export let data;
@@ -27,7 +27,7 @@
 
     const fetchSpotify = async () => { // too lazy to rename this lol
       try {
-        const response = await fetch(`https://api.lanyard.rest/v1/users/${discordID}`);
+        const response = await fetch(`https://api.lanyard.rest/v1/users/883816535033020416`);
         const data = await response.json();
         statusData = data.data.discord_status;
   
@@ -75,10 +75,10 @@
         <!-- hrefs, top right -->
         <div class="absolute top-4.75 right-6 flex items-center">
           <span class="krypton text-sm text-[#a6a6ad]" style="margin-left: -2px;">
-            <a href="/projects" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">projects</a>
-            <a href="/socials" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">socials</a>
-            <a href="/music" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">music</a>
-            <a href="/blog" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">blog</a>
+            <a href="/projects" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">1.</a>
+            <a href="/socials" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">2.</a>
+            <a href="/music" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">3.</a>
+            <a href="/blog" class="underline text-[#a6a6ad] hover:text-[#dbdbde]">4.</a>
           </span>
         </div>
 
